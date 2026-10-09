@@ -229,7 +229,7 @@
     librarySubject: bank.subjects[0].id,
     librarySearch: "",
     librarySource: "all",
-    ebookMaterial: "高频考点与重难点",
+    ebookMaterial: "高频考点",
     ebookSubject: "all",
     ebookBookId: "",
     ebookSectionId: "",
@@ -1932,205 +1932,95 @@
     return parts.length ? parts : [String(line).trim()];
   }
 
-  function renderEbook() {
-    const material = READER_MATERIALS.includes(ui.ebookMaterial)
-      ? ui.ebookMaterial
-      : READER_MATERIALS[0];
-    const subjectId = ui.ebookSubject || "all";
-    const books = readerBooksForMaterial(material, subjectId);
+  const EBOOK_ROLES = ["高频考点", "三色笔记", "公式汇总"];
 
-    const subjectTabs = [
+  function renderEbook() {
+    const role = EBOOK_ROLES.includes(ui.ebookMaterial)
+      ? ui.ebookMaterial
+      : EBOOK_ROLES[0];
+    ui.ebookMaterial = role;
+    const subjectId = ui.ebookSubject || "all";
+    const entries = (originalsCatalog.entries || []).filter(
+      (entry) =>
+        entry.role === role && (subjectId === "all" || entry.subjectId === subjectId),
+    );
+    const subjects = [
       { id: "all", name: "全部科目" },
       ...bank.subjects.map((subject) => ({ id: subject.id, name: subject.shortName })),
-    ]
-      .map(
-        (item) => `
-          <button type="button" class="${item.id === subjectId ? "active" : ""}" data-action="ebook-subject" data-subject-id="${item.id}">
-            ${htmlEscape(item.name)}
-          </button>
-        `,
-      )
-      .join("");
-
-    const materialTabs = READER_MATERIALS.map(
+    ];
+    const materialTabs = EBOOK_ROLES.map(
       (item) => `
-        <button type="button" class="${item === material ? "active" : ""}" data-action="ebook-material" data-material="${htmlEscape(item)}">
+        <button type="button" class="${item === role ? "active" : ""}" data-action="ebook-material" data-material="${htmlEscape(item)}">
           ${htmlEscape(item)}
         </button>
       `,
     ).join("");
-
-    if (!books.length) {
-      mainContent.innerHTML = `
-        <div class="page ebook-page">
-          ${pageHead("电子书", "高频考点 · 三色笔记 · 公式汇总，同一页面切换阅读", "")}
-          <div class="ebook-toolbar">
-            <div class="segmented">${materialTabs}</div>
-            <div class="segmented ebook-subject-tabs">${subjectTabs}</div>
-          </div>
-          <div class="empty-state"><div><span class="empty-state-icon">${icon("book-x")}</span><h2>该科目暂无此类资料</h2><p>换一个科目或资料来源试试。</p></div></div>
-        </div>
-      `;
-      refreshIcons();
-      return;
-    }
-
-    const activeBook = books.find((book) => book.id === ui.ebookBookId) || books[0];
-    ui.ebookBookId = activeBook.id;
-    const generation = (ui.ebookGeneration || 0) + 1;
-    ui.ebookGeneration = generation;
-
-    if (!readerCache.has(activeBook.id)) {
-      mainContent.innerHTML = `
-        <div class="page ebook-page">
-          ${pageHead("电子书", `${activeBook.subjectName} · ${activeBook.materialName} · ${activeBook.title}`, "")}
-          <div class="ebook-toolbar">
-            <div class="segmented">${materialTabs}</div>
-            <div class="segmented ebook-subject-tabs">${subjectTabs}</div>
-          </div>
-          <div class="empty-state"><div><span class="empty-state-icon">${icon("loader-circle")}</span><h2>正在排版这本书</h2><p>首次打开需要加载内容，之后会自动缓存。</p></div></div>
-        </div>
-      `;
-      refreshIcons();
-      loadReaderBook(activeBook.id)
-        .then(() => {
-          if (ui.view === "recite" && ui.ebookGeneration === generation) renderEbook();
-        })
-        .catch((error) => toast("电子书加载失败", error.message, "error"));
-      return;
-    }
-
-    const content = readerCache.get(activeBook.id);
-    const sections = readerSections(content);
-    const outline = buildReaderOutline(sections);
-    const outlineRows = flattenOutline(outline);
-    const activeRow = outlineRows.find((row) => row.id === ui.ebookChapterId);
-    const scopeStart = activeRow ? activeRow.index : 0;
-    const scopeEnd = activeRow ? activeRow.end : sections.length - 1;
-    const scopedSections = sections.slice(scopeStart, scopeEnd + 1);
-    const pageSize = 40;
-    const pageCount = readerPageCount(scopedSections.length);
-    const page = Math.min(Math.max(0, ui.ebookPage || 0), pageCount - 1);
-    ui.ebookPage = page;
-    const pageSections = scopedSections.slice(page * pageSize, page * pageSize + pageSize);
-    const sectionId = ui.ebookSectionId || pageSections[0]?.id || "";
-    ui.ebookSectionId = sectionId;
-    const openState = ui.ebookOpenChapters || {};
-    if (activeRow) {
-      let parent = activeRow.parentId;
-      while (parent) {
-        openState[parent] = true;
-        parent = outlineRows.find((row) => row.id === parent)?.parentId || "";
-      }
-    }
-    ui.ebookOpenChapters = openState;
-
-    const bookOptions = books
-      .map(
-        (book) =>
-          `<option value="${book.id}" ${book.id === activeBook.id ? "selected" : ""}>${htmlEscape(book.title)}（${book.sectionCount}节）</option>`,
-      )
-      .join("");
-
-    const tocMarkup = renderOutlineNodes(outline, 0, openState, ui.ebookChapterId);
-    const scopeLabel = activeRow ? activeRow.title : "全书";
-
-    const bodyRows = pageSections
-      .map((section) => {
-        const level = Math.min(Number(section.level) || 1, 3);
-        const heading = String(section.title || "").trim();
-        const format = String(section.format || "");
-        const content = String(section.content || "").trim();
-        const bodyOnly = readerBodyLike(section);
-        let bodyMarkup = "";
-        if (bodyOnly) {
-          bodyMarkup = `<div class="reader-body reader-list reader-body-line">${markdownLite(heading)}</div>`;
-        } else if (content) {
-          if (format === "table") {
-            bodyMarkup = renderReaderTable(content);
-          } else if (format === "formula") {
-            bodyMarkup = `<div class="reader-body reader-formula">${markdownLite(content)}</div>`;
-          } else if (format === "list") {
-            bodyMarkup = `<div class="reader-body reader-list">${markdownLite(content)}</div>`;
-          } else if (format === "note") {
-            bodyMarkup = `<div class="reader-body reader-note">${markdownLite(content)}</div>`;
-          } else {
-            bodyMarkup = `<div class="reader-body">${markdownLite(content)}</div>`;
-          }
-        }
-        return `
-          <section class="reader-section level-${level} format-${htmlEscape(format || "text")}${bodyOnly ? " body-line" : ""}" id="reader-section-${htmlEscape(section.id)}" data-section-id="${htmlEscape(section.id)}">
-            ${heading && !bodyOnly ? `<h${level + 1} class="reader-heading">${htmlEscape(heading)}</h${level + 1}>` : ""}
-            ${bodyMarkup}
-          </section>
-        `;
-      })
-      .join("");
+    const groups = new Map();
+    entries.forEach((entry) => {
+      const key = entry.subjectName || "其他";
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(entry);
+    });
+    const totalMb = entries.reduce((sum, entry) => sum + (entry.size || 0), 0) / 1024 / 1024;
 
     mainContent.innerHTML = `
-      <div class="page ebook-page reader-theme-${htmlEscape(readerPrefs.theme)}">
+      <div class="page">
         ${pageHead(
           "电子书",
-          "高频考点 · 三色笔记 · 公式汇总，同一页面切换阅读",
-          `<span class="scope-badge">${activeRow ? `筛选：${htmlEscape(scopeLabel)}（${scopedSections.length} 节）` : `全书 ${sections.length} 节`} · 共 ${pageCount} 页</span>`,
+          "高频考点 · 三色笔记 · 公式汇总：直接看原版 PDF，点开即全屏，可双指放大",
+          `<span class="scope-badge">${entries.length} 份 · ${totalMb.toFixed(1)} MB</span>`,
         )}
-
-        <div class="ebook-toolbar">
+        <div class="filter-bar">
           <div class="segmented">${materialTabs}</div>
-          <div class="segmented ebook-subject-tabs">${subjectTabs}</div>
-          <label class="field ebook-book-select">
-            ${icon("book-open")}
-            <select id="ebookBookSelect">${bookOptions}</select>
-          </label>
-          <div class="reader-controls">
-            <button class="icon-button" type="button" data-action="ebook-font" data-delta="-1" title="缩小字号" aria-label="缩小字号">${icon("minus")}</button>
-            <span class="reader-control-label" id="readerFontLabel">${readerPrefs.size}px</span>
-            <button class="icon-button" type="button" data-action="ebook-font" data-delta="1" title="放大字号" aria-label="放大字号">${icon("plus")}</button>
-            <span class="reader-divider"></span>
-            <button class="icon-button" type="button" data-action="ebook-line" data-delta="-1" title="收紧行距" aria-label="收紧行距">${icon("align-justify")}</button>
-            <span class="reader-control-label">${readerPrefs.line.toFixed(2)}</span>
-            <button class="icon-button" type="button" data-action="ebook-line" data-delta="1" title="放松行距" aria-label="放松行距">${icon("align-justify")}</button>
-            <span class="reader-divider"></span>
-            <button class="icon-button ${readerPrefs.width === "narrow" ? "active" : ""}" type="button" data-action="ebook-width" data-width="narrow" title="窄版心" aria-label="窄版心">${icon("panel-left-close")}</button>
-            <button class="icon-button ${readerPrefs.width === "normal" ? "active" : ""}" type="button" data-action="ebook-width" data-width="normal" title="标准版心" aria-label="标准版心">${icon("panel-left")}</button>
-            <button class="icon-button ${readerPrefs.width === "wide" ? "active" : ""}" type="button" data-action="ebook-width" data-width="wide" title="宽版心" aria-label="宽版心">${icon("panel-left-open")}</button>
-            <span class="reader-divider"></span>
-            <button class="icon-button ${readerPrefs.theme === "paper" ? "active" : ""}" type="button" data-action="ebook-theme" data-theme="paper" title="纸白" aria-label="纸白">${icon("sun")}</button>
-            <button class="icon-button ${readerPrefs.theme === "sepia" ? "active" : ""}" type="button" data-action="ebook-theme" data-theme="sepia" title="护眼" aria-label="护眼">${icon("leaf")}</button>
-            <button class="icon-button ${readerPrefs.theme === "night" ? "active" : ""}" type="button" data-action="ebook-theme" data-theme="night" title="夜间" aria-label="夜间">${icon("moon")}</button>
+          <div class="segmented ebook-subject-tabs">
+            ${subjects
+              .map(
+                (subject) => `
+                  <button type="button" class="${subject.id === subjectId ? "active" : ""}" data-action="ebook-subject" data-subject-id="${subject.id}">
+                    ${htmlEscape(subject.name)}
+                  </button>
+                `,
+              )
+              .join("")}
           </div>
         </div>
-
-        <div class="ebook-layout reader-width-${htmlEscape(readerPrefs.width)}">
-          <aside class="reader-toc">
-            <div class="reader-toc-head">
-              <strong>目录筛选</strong>
-              ${
-                activeRow
-                  ? `<button class="button small ghost" type="button" data-action="ebook-chapter-clear">${icon("x")}清除</button>`
-                  : `<span>${outlineRows.length} 个条目</span>`
-              }
-            </div>
-            <div class="reader-toc-list">${tocMarkup}</div>
-          </aside>
-          <article class="reader-paper">
-            <header class="reader-title">
-              <span class="eyebrow">${htmlEscape(activeBook.materialName)}</span>
-              <h1>${htmlEscape(activeBook.title)}</h1>
-              <p>${htmlEscape(activeBook.subjectName || "")} · 结构化阅读版</p>
-            </header>
-            <div class="reader-body-wrap">${bodyRows}</div>
-            <footer class="reader-foot">
-              <button class="button" type="button" data-action="ebook-page" data-page="${Math.max(0, page - 1)}" ${page === 0 ? "disabled" : ""}>${icon("arrow-left")}上一页</button>
-              <span class="reader-page-indicator">${page + 1} / ${pageCount}</span>
-              <button class="button primary" type="button" data-action="ebook-page" data-page="${Math.min(pageCount - 1, page + 1)}" ${page >= pageCount - 1 ? "disabled" : ""}>下一页${icon("arrow-right")}</button>
-            </footer>
-          </article>
-        </div>
+        ${
+          groups.size
+            ? [...groups.entries()]
+                .map(
+                  ([subjectName, rows]) => `
+                    <section class="section">
+                      <div class="section-head">
+                        <div>
+                          <h2>${htmlEscape(subjectName)}</h2>
+                          <p>${rows.length} 份原版 PDF</p>
+                        </div>
+                      </div>
+                      <div class="original-grid">
+                        ${rows
+                          .map(
+                            (entry) => `
+                              <button class="original-card" type="button" data-action="open-original" data-original-id="${entry.id}">
+                                <span class="original-icon">${icon("file-text")}</span>
+                                <span class="original-copy">
+                                  <strong>${htmlEscape(entry.title)}</strong>
+                                  <span>${htmlEscape(entry.role)} · ${(entry.size / 1024 / 1024).toFixed(1)} MB</span>
+                                </span>
+                                <span class="original-open-hint">${icon("maximize-2")}阅读</span>
+                              </button>
+                            `,
+                          )
+                          .join("")}
+                      </div>
+                    </section>
+                  `,
+                )
+                .join("")
+            : `<div class="empty-state"><div><span class="empty-state-icon">${icon("file-x")}</span><h2>该科目暂无这类原版</h2><p>换一个科目或资料类型试试。</p></div></div>`
+        }
       </div>
     `;
     refreshIcons();
-    applyReaderPrefs();
   }
   function scrollReaderTo(sectionId) {
     const target = document.querySelector(`#reader-section-${CSS.escape(sectionId)}`);
