@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1f5b87" />
+    <meta name="app-id" content="tax-exam-quiz" />
+    <title>2026税务师五科智能题库</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f5b87'/%3E%3Cpath d='M8 9h9a5 5 0 0 1 5 5v9H13a5 5 0 0 1-5-5V9z' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M17 9v5h5' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="icon-button mobile-only" id="sidebarToggle" type="button" aria-label="打开导航">
+          <i data-lucide="menu"></i>
+        </button>
+        <button class="brand" type="button" data-view="dashboard" aria-label="返回首页">
+          <span class="brand-mark"><i data-lucide="book-open-check"></i></span>
+          <span class="brand-copy">
+            <strong>税务师智能题库</strong>
+            <small>2026 · 五科全科版</small>
+          </span>
+        </button>
+        <div class="topbar-actions">
+          <button class="icon-button search-trigger" id="searchButton" type="button" aria-label="搜索题目" title="搜索题目">
+            <i data-lucide="search"></i>
+          </button>
+          <button class="icon-button" id="themeButton" type="button" aria-label="切换深浅色" title="切换深浅色">
+            <i data-lucide="moon-star"></i>
+          </button>
+          <button class="icon-button" id="settingsButton" type="button" aria-label="设置" title="设置">
+            <i data-lucide="settings"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="sidebar" id="sidebar">
+          <div class="profile-block">
+            <span class="profile-avatar">学</span>
+            <div>
+              <strong>本地备考模式</strong>
+              <small id="storageLabel">进度自动保存</small>
+            </div>
+          </div>
+
+          <nav class="primary-nav" id="primaryNav" aria-label="主要导航">
+            <button type="button" data-view="dashboard"><i data-lucide="layout-dashboard"></i><span>学习总览</span></button>
+            <button type="button" data-view="library"><i data-lucide="library-big"></i><span>章节题库</span></button>
+            <button type="button" data-view="recite"><i data-lucide="book-open-text"></i><span>电子书</span></button>
+            <button type="button" data-view="originals"><i data-lucide="file-text"></i><span>原版资料</span></button>
+            <button type="button" data-view="studio"><i data-lucide="database-zap"></i><span>内容编辑</span></button>
+            <button type="button" data-view="agent"><i data-lucide="bot"></i><span>专业 Agent</span></button>
+            <button type="button" data-view="wrong"><i data-lucide="notebook-tabs"></i><span>错题本</span><b id="wrongNavCount">0</b></button>
+            <button type="button" data-view="favorites"><i data-lucide="star"></i><span>收藏夹</span><b id="favoriteNavCount">0</b></button>
+            <button type="button" data-view="stats"><i data-lucide="chart-no-axes-combined"></i><span>学习统计</span></button>
+          </nav>
+
+          <section class="sidebar-subjects">
+            <div class="sidebar-caption">
+              <span>科目进度</span>
+              <span id="overallPercent">0%</span>
+            </div>
+            <div id="sidebarSubjectList"></div>
+          </section>
+
+          <div class="sidebar-tip">
+            <i data-lucide="cloud-off"></i>
+            <span>学习进度保存在本机固定文件，浏览器只保留恢复用副本。</span>
+          </div>
+        </aside>
+        <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="关闭导航"></button>
+
+        <main class="main-content" id="mainContent" tabindex="-1"></main>
+      </div>
+    </div>
+
+    <div class="modal-root" id="modalRoot" aria-live="polite"></div>
+    <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+    <script src="./vendor/lucide.min.js"></script>
+    <script src="./vendor/jszip.min.js"></script>
+    <script src="./data.js"></script>
+    <script src="./export-docx.js"></script>
+    <script src="./materials/content_summary.js"></script>
+    <script src="./materials/books.js"></script>
+    <script src="./materials/knowledge_books_index.js"></script>
+    <script src="./materials/unified_question_bank.js"></script>
+    <script src="./materials/originals.js"></script>
+    <script src="./cloud-client.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

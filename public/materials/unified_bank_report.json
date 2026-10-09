@@ -1,0 +1,535 @@
+{
+  "version": "2026.10-unified-confirmed",
+  "generatedAt": "2026-10-09T17:43:02",
+  "questionCount": 7051,
+  "bookCount": 40,
+  "duplicateCount": 1028,
+  "skipped": {
+    "suggested": 1128,
+    "missing": 201
+  },
+  "bySubject": {
+    "涉税服务实务": 904,
+    "涉税服务相关法律": 1540,
+    "税法（一）": 1628,
+    "税法（二）": 1494,
+    "财务与会计": 1485
+  },
+  "byType": {
+    "单项选择题": 2101,
+    "多项选择题": 1695,
+    "简答题": 27,
+    "综合分析题": 3096,
+    "计算题": 132
+  },
+  "books": [
+    {
+      "title": "历年真题",
+      "subjectId": "tax1",
+      "subjectName": "税法（一）",
+      "materialName": "真题",
+      "questionCount": 444,
+      "sourceCount": 7,
+      "sourceTitles": [
+        "2019年税务师《税法一》真题及答案",
+        "2020年税务师《税法一》真题及答案",
+        "2021年税务师《税法一》真题及答案",
+        "2022年税务师《税法一》真题及答案",
+        "2023年税务师《税法一》真题及答案",
+        "2024年税务师《税法一》真题及答案",
+        "2025考季税务师《税法（I）》真题（考生回忆版）"
+      ]
+    },
+    {
+      "title": "章节习题",
+      "subjectId": "law",
+      "subjectName": "涉税服务相关法律",
+      "materialName": "章节题目",
+      "questionCount": 425,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2025年税务师《涉税服务相关法律》章节习题及答案解析"
+      ]
+    },
+    {
+      "title": "历年真题",
+      "subjectId": "tax2",
+      "subjectName": "税法（二）",
+      "materialName": "真题",
+      "questionCount": 415,
+      "sourceCount": 7,
+      "sourceTitles": [
+        "2019年税务师《税法二》真题及答案",
+        "2020年税务师《税法二》真题及答案",
+        "2021年税务师《税法二》真题及答案",
+        "2022年税务师《税法二》真题及答案",
+        "2023年税务师《税法二》真题及答案",
+        "2024年税务师《税法二》真题及答案",
+        "2025考季税务师《税法（Ⅱ）》真题（考生回忆版）"
+      ]
+    },
+    {
+      "title": "历年真题",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "真题",
+      "questionCount": 405,
+      "sourceCount": 7,
+      "sourceTitles": [
+        "2019年税务师《财务与会计》真题及答案",
+        "2020年税务师《财务与会计》真题及答案",
+        "2021年税务师《财务与会计》真题及答案",
+        "2022年税务师《财务与会计》真题及答案",
+        "2023年税务师《财务与会计》真题及答案",
+        "2024年税务师《财务与会计》真题及答案",
+        "2025考季税务师《财务与会计》真题（考生回忆版）"
+      ]
+    },
+    {
+      "title": "历年真题",
+      "subjectId": "law",
+      "subjectName": "涉税服务相关法律",
+      "materialName": "真题",
+      "questionCount": 404,
+      "sourceCount": 7,
+      "sourceTitles": [
+        "2019年税务师《涉税服务相关法律》真题及答案",
+        "2020年税务师《涉税服务相关法律》真题及答案",
+        "2021年税务师《涉税服务相关法律》真题及答案",
+        "2022年税务师《涉税服务相关法律》真题及答案",
+        "2023年税务师《涉税服务相关法律》真题及答案",
+        "2024年税务师《涉税服务相关法律》真题及答案",
+        "2025考季税务师《涉税服务相关法律》真题（考生回忆版）"
+      ]
+    },
+    {
+      "title": "模拟卷",
+      "subjectId": "tax1",
+      "subjectName": "税法（一）",
+      "materialName": "模拟预测题",
+      "questionCount": 370,
+      "sourceCount": 5,
+      "sourceTitles": [
+        "2025年税务师《税法一》模拟卷一",
+        "2025年税务师《税法一》模拟卷二",
+        "税务师《税法一》模拟试卷一",
+        "税务师《税法一》模拟试卷三",
+        "税务师《税法一》模拟试卷二"
+      ]
+    },
+    {
+      "title": "模拟卷",
+      "subjectId": "tax2",
+      "subjectName": "税法（二）",
+      "materialName": "模拟预测题",
+      "questionCount": 358,
+      "sourceCount": 5,
+      "sourceTitles": [
+        "2025年税务师《税法二》模拟卷一",
+        "2025年税务师《税法二》模拟卷二",
+        "2025年税务师《税法二》模拟试卷一",
+        "2025年税务师《税法二》模拟试卷三",
+        "2025年税务师《税法二》模拟试卷二"
+      ]
+    },
+    {
+      "title": "模拟卷",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "章节题目",
+      "questionCount": 357,
+      "sourceCount": 6,
+      "sourceTitles": [
+        "2025年税务师《财务与会计》模拟卷一",
+        "2025年税务师《财务与会计》模拟卷二",
+        "2025年税务师《财务与会计》模拟试卷一",
+        "2025年税务师《财务与会计》模拟试卷三",
+        "2025年税务师《财务与会计》模拟试卷二",
+        "2025年税务师财务与会计各章节模拟试题(第5-18章)"
+      ]
+    },
+    {
+      "title": "模拟卷",
+      "subjectId": "law",
+      "subjectName": "涉税服务相关法律",
+      "materialName": "模拟预测题",
+      "questionCount": 350,
+      "sourceCount": 5,
+      "sourceTitles": [
+        "2025年税务师《涉税服务相关法律》模拟卷一",
+        "2025年税务师《涉税服务相关法律》模拟卷二",
+        "2025年税务师《涉税服务相关法律》模拟试卷一",
+        "2025年税务师《涉税服务相关法律》模拟试卷三",
+        "2025年税务师《涉税服务相关法律》模拟试卷二"
+      ]
+    },
+    {
+      "title": "章节习题",
+      "subjectId": "tax2",
+      "subjectName": "税法（二）",
+      "materialName": "章节题目",
+      "questionCount": 335,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2025年税务师《税法二》章节习题及答案解析"
+      ]
+    },
+    {
+      "title": "章节习题",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "章节题目",
+      "questionCount": 308,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2025年税务师《财务与会计》章节习题及答案解析"
+      ]
+    },
+    {
+      "title": "300母题",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "经典母题",
+      "questionCount": 299,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《财务与会计》300母题"
+      ]
+    },
+    {
+      "title": "300母题",
+      "subjectId": "tax1",
+      "subjectName": "税法（一）",
+      "materialName": "经典母题",
+      "questionCount": 288,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《税法一》300母题"
+      ]
+    },
+    {
+      "title": "章节习题",
+      "subjectId": "practice",
+      "subjectName": "涉税服务实务",
+      "materialName": "章节题目",
+      "questionCount": 276,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2025年税务师《涉税服务实务》章节习题及答案解析"
+      ]
+    },
+    {
+      "title": "历年真题",
+      "subjectId": "practice",
+      "subjectName": "涉税服务实务",
+      "materialName": "真题",
+      "questionCount": 252,
+      "sourceCount": 7,
+      "sourceTitles": [
+        "2019年税务师《涉税服务实务》真题及答案",
+        "2020年税务师《涉税服务实务》真题及答案",
+        "2021年税务师《涉税服务实务》真题及答案",
+        "2022年税务师《涉税服务实务》真题及答案",
+        "2023年税务师《涉税服务实务》真题及答案",
+        "2024年税务师《涉税服务实务》真题及答案",
+        "2025考季税务师《涉税服务实务》真题（考生回忆版）"
+      ]
+    },
+    {
+      "title": "章节习题",
+      "subjectId": "tax1",
+      "subjectName": "税法（一）",
+      "materialName": "章节题目",
+      "questionCount": 234,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2025年税务师《税法一》章节习题及答案解析"
+      ]
+    },
+    {
+      "title": "预测试卷",
+      "subjectId": "tax1",
+      "subjectName": "税法（一）",
+      "materialName": "模拟预测题",
+      "questionCount": 227,
+      "sourceCount": 3,
+      "sourceTitles": [
+        "税务师《税法一》预测试卷一",
+        "税务师《税法一》预测试卷三",
+        "税务师《税法一》预测试卷二"
+      ]
+    },
+    {
+      "title": "预测试卷",
+      "subjectId": "tax2",
+      "subjectName": "税法（二）",
+      "materialName": "模拟预测题",
+      "questionCount": 217,
+      "sourceCount": 3,
+      "sourceTitles": [
+        "2025年税务师《税法二》预测试卷一",
+        "2025年税务师《税法二》预测试卷三",
+        "2025年税务师《税法二》预测试卷二"
+      ]
+    },
+    {
+      "title": "预测试卷",
+      "subjectId": "law",
+      "subjectName": "涉税服务相关法律",
+      "materialName": "模拟预测题",
+      "questionCount": 215,
+      "sourceCount": 3,
+      "sourceTitles": [
+        "2025年税务师《涉税服务相关法律》预测试卷一",
+        "2025年税务师《涉税服务相关法律》预测试卷三",
+        "2025年税务师《涉税服务相关法律》预测试卷二"
+      ]
+    },
+    {
+      "title": "模拟卷",
+      "subjectId": "practice",
+      "subjectName": "涉税服务实务",
+      "materialName": "模拟预测题",
+      "questionCount": 126,
+      "sourceCount": 5,
+      "sourceTitles": [
+        "2025年税务师《涉税服务实务》模拟卷一",
+        "2025年税务师《涉税服务实务》模拟卷二",
+        "2025年税务师《涉税服务实务》模拟试卷一",
+        "2025年税务师《涉税服务实务》模拟试卷三",
+        "2025年税务师《涉税服务实务》模拟试卷二"
+      ]
+    },
+    {
+      "title": "预测试卷",
+      "subjectId": "practice",
+      "subjectName": "涉税服务实务",
+      "materialName": "模拟预测题",
+      "questionCount": 93,
+      "sourceCount": 3,
+      "sourceTitles": [
+        "2025年税务师《涉税服务实务》预测试卷一",
+        "2025年税务师《涉税服务实务》预测试卷三",
+        "2025年税务师《涉税服务实务》预测试卷二"
+      ]
+    },
+    {
+      "title": "经典母题",
+      "subjectId": "tax2",
+      "subjectName": "税法（二）",
+      "materialName": "经典母题",
+      "questionCount": 66,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《税法二》经典108道母题"
+      ]
+    },
+    {
+      "title": "经典母题",
+      "subjectId": "law",
+      "subjectName": "涉税服务相关法律",
+      "materialName": "经典母题",
+      "questionCount": 65,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《涉税服务相关法律》经典108道母题"
+      ]
+    },
+    {
+      "title": "模拟题",
+      "subjectId": "law",
+      "subjectName": "涉税服务相关法律",
+      "materialName": "模拟预测题",
+      "questionCount": 64,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2026年税务师《涉税服务相关法律》模拟题"
+      ]
+    },
+    {
+      "title": "模拟题",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "模拟预测题",
+      "questionCount": 63,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2026年税务师《财务与会计》模拟题"
+      ]
+    },
+    {
+      "title": "模拟题",
+      "subjectId": "tax2",
+      "subjectName": "税法（二）",
+      "materialName": "模拟预测题",
+      "questionCount": 62,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2026年税务师《税法（二）》模拟题"
+      ]
+    },
+    {
+      "title": "经典母题",
+      "subjectId": "practice",
+      "subjectName": "涉税服务实务",
+      "materialName": "经典母题",
+      "questionCount": 62,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《涉税服务实务》经典108道母题"
+      ]
+    },
+    {
+      "title": "300母题",
+      "subjectId": "practice",
+      "subjectName": "涉税服务实务",
+      "materialName": "经典母题",
+      "questionCount": 59,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《涉税实务》300母题"
+      ]
+    },
+    {
+      "title": "模拟题",
+      "subjectId": "tax1",
+      "subjectName": "税法（一）",
+      "materialName": "模拟预测题",
+      "questionCount": 58,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2026年税务师《税法（一）》模拟题"
+      ]
+    },
+    {
+      "title": "模拟题",
+      "subjectId": "practice",
+      "subjectName": "涉税服务实务",
+      "materialName": "模拟预测题",
+      "questionCount": 36,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2026年税务师《涉税服务实务》模拟题"
+      ]
+    },
+    {
+      "title": "300母题",
+      "subjectId": "tax2",
+      "subjectName": "税法（二）",
+      "materialName": "经典母题",
+      "questionCount": 26,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《税法二》300母题"
+      ]
+    },
+    {
+      "title": "章节习题汇总",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "章节题目",
+      "questionCount": 22,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "2025年税务师《财务与会计》章节习题汇总（1-4章）"
+      ]
+    },
+    {
+      "title": "经典母题",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "经典母题",
+      "questionCount": 18,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《财务与会计》经典108道母题"
+      ]
+    },
+    {
+      "title": "章节补充题",
+      "subjectId": "tax2",
+      "subjectName": "税法（二）",
+      "materialName": "章节题目",
+      "questionCount": 15,
+      "sourceCount": 5,
+      "sourceTitles": [
+        "01、第一章 企业所得税",
+        "02、第二章 个人所得税",
+        "03、第三章 国际税收",
+        "04、第四章 印花税",
+        "07、第七章 契税"
+      ]
+    },
+    {
+      "title": "300母题",
+      "subjectId": "law",
+      "subjectName": "涉税服务相关法律",
+      "materialName": "经典母题",
+      "questionCount": 13,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《涉税法律》300母题"
+      ]
+    },
+    {
+      "title": "章节补充题",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "章节题目",
+      "questionCount": 10,
+      "sourceCount": 3,
+      "sourceTitles": [
+        "03、第三章 筹资与股利分配管理",
+        "04、第四章 投资管理",
+        "08、第八章 流动资产"
+      ]
+    },
+    {
+      "title": "章节补充题",
+      "subjectId": "law",
+      "subjectName": "涉税服务相关法律",
+      "materialName": "章节题目",
+      "questionCount": 4,
+      "sourceCount": 2,
+      "sourceTitles": [
+        "14、第二篇 民商法律制度——第十四章 破产法",
+        "17、第二编 民商法律制度——第十七章 民事诉讼法"
+      ]
+    },
+    {
+      "title": "经典母题",
+      "subjectId": "tax1",
+      "subjectName": "税法（一）",
+      "materialName": "经典母题",
+      "questionCount": 4,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《税法一》经典108道母题"
+      ]
+    },
+    {
+      "title": "章节补充题",
+      "subjectId": "tax1",
+      "subjectName": "税法（一）",
+      "materialName": "章节题目",
+      "questionCount": 3,
+      "sourceCount": 3,
+      "sourceTitles": [
+        "02、第二章 增值税",
+        "03、第三章 消费税",
+        "10、第十章 关税"
+      ]
+    },
+    {
+      "title": "预测试卷",
+      "subjectId": "finance",
+      "subjectName": "财务与会计",
+      "materialName": "模拟预测题",
+      "questionCount": 3,
+      "sourceCount": 1,
+      "sourceTitles": [
+        "税务师《财务与会计》预测卷（二）"
+      ]
+    }
+  ]
+}
