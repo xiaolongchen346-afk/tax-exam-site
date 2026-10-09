@@ -1097,7 +1097,26 @@
       renderAgent();
     } catch (error) {
       document.querySelector(`#${loadingId}`)?.remove();
-      toast("专业 Agent 暂时不可用", error.message, "error");
+      const detail = String(error.message || "未知错误");
+      let hint = detail;
+      if (/密钥|DeepSeek|DEEPSEEK/i.test(detail) || /503/.test(detail)) {
+        hint = `${detail}\n\n云端版需要先在 Netlify 里配置环境变量 DEEPSEEK_API_KEY，然后重新部署一次。`;
+      } else if (/404/.test(detail)) {
+        hint = `${detail}\n\n网站可能还是旧版本，先更新部署再试。`;
+      } else if (/401/.test(detail)) {
+        hint = `${detail}\n\n登录状态可能已过期，刷新页面重新登录一次。`;
+      } else if (/Failed to fetch|NetworkError/i.test(detail)) {
+        hint = `${detail}\n\n网络不通或接口被拦截，检查网络后重试。`;
+      }
+      state.agentMessages.push({
+        role: "assistant",
+        content: `本次请求失败：${hint}`,
+        timestamp: new Date().toISOString(),
+      });
+      state.agentMessages = state.agentMessages.slice(-30);
+      saveState();
+      renderAgent();
+      toast("专业 Agent 暂时不可用", detail, "error");
     }
   }
 
