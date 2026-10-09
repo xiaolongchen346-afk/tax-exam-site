@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { getStore } from "@netlify/blobs";
+import { connectLambda, getStore } from "@netlify/blobs";
 
 const USERS = [
   {
@@ -364,6 +364,14 @@ async function appendAnalysisHistory(store, account, result, metrics) {
 }
 
 export async function handler(event) {
+  // Lambda-compatibility functions must connect Blobs before any store access,
+  // otherwise getStore throws MissingBlobsEnvironmentError at runtime.
+  try {
+    connectLambda(event);
+  } catch (error) {
+    console.error("connectLambda failed", error);
+  }
+
   const path = String(event.path || "").replace(/\/+$/, "");
   const method = String(event.httpMethod || "GET").toUpperCase();
 
